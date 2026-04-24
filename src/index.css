@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #0a0f0d;
+    color: #e2e8f0;
+  }
+  /* Subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0f0d;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1f2a25;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a3a32;
+  }
+  /* Hide number input spinners */
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-bg-surface border border-bg-border rounded-xl;
+  }
+  .card-elevated {
+    @apply bg-bg-elevated border border-bg-border rounded-xl;
+  }
+  .input-base {
+    @apply w-full bg-bg-base border border-bg-border rounded-lg px-3 py-2 text-ink
+           placeholder:text-ink-dim focus:outline-none focus:border-accent
+           focus:ring-1 focus:ring-accent transition-colors;
+  }
+  .label-base {
+    @apply block text-sm text-ink-mute mb-1.5;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-accent text-bg-base font-medium hover:bg-accent-hover
+           active:scale-[0.98] transition disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-bg-elevated text-ink border border-bg-border hover:border-accent
+           active:scale-[0.98] transition disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg
+           bg-danger/10 text-danger border border-danger/30 hover:bg-danger/20
+           active:scale-[0.98] transition disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg
+           text-ink-mute hover:text-ink hover:bg-bg-elevated transition;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs
+           bg-bg-elevated border border-bg-border text-ink-mute;
+  }
+}
+
+/* Safe-area for iOS bottom bar */
+.pb-safe {
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+}
