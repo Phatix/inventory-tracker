@@ -108,7 +108,7 @@ jobs:
 Nach dem Push → GitHub Actions läuft → 2-3 Min später:
 
 ```
-https://DEINUSERNAME.github.io/inventory-tracker/
+https://Phatix.github.io/inventory-tracker/
 ```
 
 Kollege öffnet Link auf seinem Handy:
