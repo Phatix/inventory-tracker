@@ -54,8 +54,68 @@ npm run preview
 ```
 
 Der `dist/` Ordner enthält statische Dateien — kann auf jedem
-beliebigen Webserver gehostet werden (auch via `file://` für komplett
-lokale Nutzung).
+beliebigen Webserver gehostet werden.
+
+## 🚀 Deployment auf GitHub Pages (PWA)
+
+Diese App ist als **PWA (Progressive Web App)** vorkonfiguriert. Das heißt: Dein
+Kollege kann die App wie eine native App auf seinem Handy installieren (iOS/Android).
+
+### Schritt 1: GitHub Repo erstellen
+
+```bash
+cd /home/mike/MIKE_OS/01_PROJEKTE/inventory-tracker
+git remote add origin https://github.com/DEINUSERNAME/inventory-tracker.git
+git branch -M main
+git push -u origin main
+```
+
+### Schritt 2: GitHub Pages aktivieren
+
+1. Gehe zu **Settings → Pages** (repo)
+2. **Source:** `GitHub Actions`
+3. Speichern
+
+### Schritt 3: Deploy Workflow erstellen
+
+Erstelle `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy PWA to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run build
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+```
+
+### Schritt 4: Link zum Kollegen
+
+Nach dem Push → GitHub Actions läuft → 2-3 Min später:
+
+```
+https://DEINUSERNAME.github.io/inventory-tracker/
+```
+
+Kollege öffnet Link auf seinem Handy:
+- **Android:** Menu → "Zur App hinzufügen" / "Install app"
+- **iOS:** Share → "Zum Startbildschirm"
+
+Dann läuft die App **offline** auf seinem Handy! 📱
 
 ## Datenmodell
 
